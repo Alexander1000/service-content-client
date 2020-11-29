@@ -2,13 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace Alexander1000/Clients/Content/Request/V1/Content;
+namespace Alexander1000\Clients\Content\Request\V1\Content;
 
 use NetworkTransport;
 
 class Save extends NetworkTransport\Http\Request\Data
 {
-    public __construct(
+    public function __construct(
         ?int $id,
         string $title,
         string $text,

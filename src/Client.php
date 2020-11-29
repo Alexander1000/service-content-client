@@ -13,6 +13,15 @@ class Client
         protected NetworkTransport\Http\Request\Builder $requestBuilder,
     ) {}
 
+    public function save(?int $id, string $title, string $text, int $userId): int
+    {
+        $response = $this->executeRequest(
+            new Request\V1\Content\Save(id: $id, title: $title, text: $text, userId: $userId)
+        );
+
+        return (int) $response->getResult()['contentId'];
+    }
+
     /**
      * @param NetworkTransport\Http\Request\Data $requestData
      * @return Response
