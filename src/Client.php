@@ -13,13 +13,22 @@ class Client
         protected NetworkTransport\Http\Request\Builder $requestBuilder,
     ) {}
 
-    public function save(?int $id, string $title, string $text, int $userId): int
+    public function saveContent(?int $id, string $title, string $text, int $userId): int
     {
         $response = $this->executeRequest(
             new Request\V1\Content\Save(id: $id, title: $title, text: $text, userId: $userId)
         );
 
         return (int) $response->getResult()['contentId'];
+    }
+
+    public function savePage(?int $id, string $slug, ?int $contentId): bool
+    {
+        $response = $this->executeRequest(
+            new Request\V1\Page\Save(id: $id, slug: $slug, contentId: $contentId)
+        );
+
+        return $response->getResult()['success'];
     }
 
     /**
